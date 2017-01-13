@@ -7,12 +7,25 @@ function _init()
 		print("t3chfest201",0,0)
 		print("7",43,0)
   memcpy(0x0,0x6000,0x200)
+  bands = {}
+  for f=1,2 do
+   make_band(f) 
+  end
 end  
   
+
+function _update()
+  foreach(bands,update_band)
+end
+
 
 function _draw()
 
 	 cls()
+
+  rectfill(0,75,128,125,1)
+
+  foreach(bands,draw_band)
 
 		draw_text( 5,4,0,15,4,2)
 		draw_text( 6,3,0,15,4,2)
@@ -28,13 +41,36 @@ function _draw()
 		draw_text(3,0,16,23,11,-90)
 		draw_text(12,0,16,23,11,-90)
 
-		printrgb("regreso a los 32kb",30,92)
-		printrgb("10/02/2017 09:00-10:15",22,101)
+		print_rgb("regreso a los 32kb",30,93)
+		print_rgb("10/02/2017 09:00-10:15",22,102)
 				
 end
 
 
-function printrgb(s,x,y)
+function make_band(c)
+  local b={}
+  b.a  = rnd(1)
+  b.yt = 0
+  b.yb = 0
+  b.da = rnd(5)/200
+  b.dt = 1 + rnd(1)/25 
+  b.db = b.dt + rnd(1)/5
+  b.c = 2 + c % 2
+  add(bands, b)
+  return b 
+end
+
+function update_band(b)
+  b.a += b.da
+  b.yt = sin(b.a*b.dt)*25+100
+  b.yb = sin(b.a*b.db)*25+100
+end
+
+function draw_band(b)
+  rectfill(0,b.yt,128,b.yb,b.c)
+end
+
+function print_rgb(s,x,y)
 
 		color(3)
 		print(s,x-1,y) 
@@ -52,17 +88,17 @@ function draw_text(c,w,xs,xe,yo,xo)
 		    x1 = band(bg,0x0f)
 		    x2 = band(bg,0xf0)
 		    if(x1>0) then
-								drawpoint(x,y+yo,xo,c,w)
+								draw_point(x,y+yo,xo,c,w)
       end	
 		    if(x2>0) then
-								drawpoint(x,y+yo,xo+4,c,w)
+								draw_point(x,y+yo,xo+4,c,w)
       end	
     end 
 		end
 end
 
 
-function drawpoint(x,y,o,c,w)
+function draw_point(x,y,o,c,w)
 		rx = x*8+o
 		ry = y*4
   dx = flr(rnd(3))-1
