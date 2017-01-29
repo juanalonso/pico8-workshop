@@ -17,54 +17,44 @@ end
 
 function _draw()
 
-		draw_text( 9,5, 0,15, 2,  1)
-		draw_text(10,5,16,23, 9,-93)
+		draw_text( 9,5, 0,15, 4,  1)
+		draw_text( 9,5,16,23,11,-93)
 
-		print_rgb("regreso a los 32kb",29,107)
-		print_rgb("10/02/2017 09:00-10:15",21,116)
+		print_rgb("regreso a los 32kb",29,100)
+		print_rgb("10/02/2017 09:00-10:15",21,109)
 
-		for f=1,1800 do
+		for f=1,2000 do
 		  x = flr(rnd(126))+1
 		  y = flr(rnd(126))+1
-		  
-		  --drip
+
 		  if (pget(x,y)==0 and (
-		      pget(x,y-1)==10 or
-        pget(x,y-1)==9 or
-        pget(x,y-1)==8
-		     )) then
-		    pset(x,y,8)
-		  end
-		  
-		  --pool left
-		  if (pget(x,y)==8 and 
-		      pget(x-1,y)==0 and (
-        pget(x,y+1)==10 or
-        pget(x,y+1)==9 or
-        pget(x,y+1)==7) and (
-        pget(x-1,y+1)==10 or
-        pget(x-1,y+1)==9 or
-        pget(x-1,y+1)==7)
-       ) then
-  		  pset(x-1,y,8)
+      count_neighbours(x,y)>=2
+     )) then
+		    pset(x,y,3)
 		  end
 
-    --pool right
-    if (pget(x,y)==8 and 
-        pget(x+1,y)==0 and (
-        pget(x,y+1)==10 or
-        pget(x,y+1)==9 or
-        pget(x,y+1)==7) and (
-        pget(x+1,y+1)==10 or
-        pget(x+1,y+1)==9 or
-        pget(x+1,y+1)==7)
-       ) then
-      pset(x+1,y,8)
-    end
+		  if (pget(x,y)==3 and (
+      count_neighbours(x,y)>=6
+     )) then
+		    pset(x,y,0)
+		  end
 
 		  
 		end
 
+end
+
+
+function count_neighbours(x,y)
+  counter = 0
+  for i=y-1,y+1 do
+    for j=x-1,x+1 do
+      if(pget(j,i)!=0) then
+        counter += 1
+      end
+    end
+  end
+  return counter
 end
 
 
