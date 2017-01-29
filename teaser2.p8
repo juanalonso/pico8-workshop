@@ -1,9 +1,6 @@
 pico-8 cartridge // http://www.pico-8.com
 version 8
 __lua__
-t = 0
-
-
 function _init()  
   cls()
   color(7)
@@ -15,7 +12,6 @@ end
   
 
 function _update()
-  t += 0.02
 end
 
 
@@ -40,16 +36,32 @@ function _draw()
 		    pset(x,y,8)
 		  end
 		  
-		  --pool
-		  --if (pget(x,y)==8 and 
-		  --    pget(x-1,y)==0 and
-    --    pget(x+1,y)==0 and
-    --    pget(x,y+1)!=8 and
-    --    pget(x,y+1)!=0 
-		  --   ) then
-		  --  pset(x-1,y,8)
-		  --  pset(x+1,y,8)
-		  --end
+		  --pool left
+		  if (pget(x,y)==8 and 
+		      pget(x-1,y)==0 and (
+        pget(x,y+1)==10 or
+        pget(x,y+1)==9 or
+        pget(x,y+1)==7) and (
+        pget(x-1,y+1)==10 or
+        pget(x-1,y+1)==9 or
+        pget(x-1,y+1)==7)
+       ) then
+  		  pset(x-1,y,8)
+		  end
+
+    --pool right
+    if (pget(x,y)==8 and 
+        pget(x+1,y)==0 and (
+        pget(x,y+1)==10 or
+        pget(x,y+1)==9 or
+        pget(x,y+1)==7) and (
+        pget(x+1,y+1)==10 or
+        pget(x+1,y+1)==9 or
+        pget(x+1,y+1)==7)
+       ) then
+      pset(x+1,y,8)
+    end
+
 		  
 		end
 
