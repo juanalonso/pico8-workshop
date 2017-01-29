@@ -10,6 +10,7 @@ function _init()
   print("t3chfest201",0,0)
   print("7",43,0)
   memcpy(0x0,0x6000,0x200)
+  cls()
 end  
   
 
@@ -20,19 +21,38 @@ end
 
 function _draw()
 
-	 cls()
+		draw_text( 9,5, 0,15, 2,  1)
+		draw_text(10,5,16,23, 9,-93)
 
-		draw_text(9,5, 0,15, 2,  2)
-		draw_text(10,5,16,23,9,-92)
+		print_rgb("regreso a los 32kb",29,107)
+		print_rgb("10/02/2017 09:00-10:15",21,116)
 
-		print_rgb("regreso a los 32kb",30,107)
-		print_rgb("10/02/2017 09:00-10:15",22,116)
-
-		for f=6,56,2 do
-    a = sin(f/164+t)*10*(56-f)/63
-		  memcpy(0x6000+(92-f/2)*64+a,0x6000+f*64,64)
+		for f=1,1800 do
+		  x = flr(rnd(126))+1
+		  y = flr(rnd(126))+1
+		  
+		  --drip
+		  if (pget(x,y)==0 and (
+		      pget(x,y-1)==10 or
+        pget(x,y-1)==9 or
+        pget(x,y-1)==8
+		     )) then
+		    pset(x,y,8)
+		  end
+		  
+		  --pool
+		  --if (pget(x,y)==8 and 
+		  --    pget(x-1,y)==0 and
+    --    pget(x+1,y)==0 and
+    --    pget(x,y+1)!=8 and
+    --    pget(x,y+1)!=0 
+		  --   ) then
+		  --  pset(x-1,y,8)
+		  --  pset(x+1,y,8)
+		  --end
+		  
 		end
-				
+
 end
 
 
