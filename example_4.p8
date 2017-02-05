@@ -4,7 +4,15 @@ __lua__
 function _init()
 
   ghosts = {}
-  init_ghost()
+  --2
+  --for y=0,120,8 do
+    init_ghost()
+    --6
+    --init_ghost(y)
+    --init_ghost(y)
+    --init_ghost(y)
+  --2
+  --end
 
 end
 
@@ -32,10 +40,19 @@ function init_ghost()
 
   g = {}
   g.x = 0
+  --4
+  --g.x = flr(rnd(128))
+  g.deltax = 1
+  --6
+  --g.deltax = 0.5 + rnd(2)
   g.y = 60
+  --2
+  --g.y = y
   g.time = 0
   g.sprite = 0
-  g.type = 3
+  g.type = 0
+  --3
+  --g.type = flr(rnd(4))
   add (ghosts, g) 
 
 end
@@ -54,7 +71,7 @@ function update_ghost(g)
     g.sprite=1
   end
 
-  g.x += 1
+  g.x += g.deltax
   if g.x > 127 then
     g.x = -8
   end
@@ -64,7 +81,10 @@ end
 
 function draw_ghost(g)
 
-  if g.type==1 then
+  if g.type==0 then
+    pal(8,8)
+    pal(2,2)
+  elseif g.type==1 then
     pal(8,12)
     pal(2,1)
   elseif g.type==2 then
