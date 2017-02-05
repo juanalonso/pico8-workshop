@@ -2,68 +2,41 @@ pico-8 cartridge // http://www.pico-8.com
 version 8
 __lua__
 function _init()
-
-  --2
-  --t = 0
-  
-  --5
-  --x = 0
-
 end
     
 
 function _update()
-
-  --2
-  --t = t + 1 
-  --if t > 20 then
-  --  t = 0 
-  --end 
-  
-  --5
-  --x += 2
-  --if x > 127 then
-  --  x = -24
-  --end
-
 end  
   
 
 function _draw()
 
-  --3
+  --2
   --pal()
   --palt(0,false)
+  
+  --3
   --palt(14,true)
 
   --1
   rectfill(0,0,127,127,6)
   sspr(0,0,8,8,36,48,24,24)
   
-  --2
-  --if (t<10) then
-  --  spx = 0
-  --  --3
-  --  spx = 24
-  --else 
-  --  spx = 8
-  --  --3
-  --  spx = 32
-  --end
-  --sspr(spx,0,8,8,x,48,24,24)
-
-  --4
+  --3
+  --sspr(24,0,8,8,36,48,24,24)
+  
+  --3
   --pal(8,12)
   --pal(2,1)
-  --sspr(spx,0,8,8,4,48,24,24)
+  --sspr(24,0,8,8,4,48,24,24)
 
   --pal(8,9)
   --pal(2,4)
-  --sspr(spx,0,8,8,68,48,24,24)
+  --sspr(24,0,8,8,68,48,24,24)
 
   --pal(8,14)
   --pal(2,2)
-  --sspr(spx,0,8,8,100,48,24,24)
+  --sspr(24,0,8,8,100,48,24,24)
 
 end
 
