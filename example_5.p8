@@ -15,7 +15,8 @@ function _draw()
   circfill(64,64,18,8)
   circfill(64,64,16,2)
 
-		for f=1,2000 do
+  --2
+		--for f=1,2000 do
 		  x = flr(rnd(126))+1
 		  y = flr(rnd(126))+1
 
@@ -38,7 +39,7 @@ function _draw()
 				-- ==1,9 >=3,0
 				-- ==2,9 >=5,0
 		  
-		end
+		--end
 
 end
 
