@@ -2,13 +2,16 @@ pico-8 cartridge // http://www.pico-8.com
 version 8
 __lua__
 function _init()
-
-  cls()
 				
 		t = 0
-		lastx = 0
 		
+		--30
+		--lastx = 0
+				
 		ghosts = {}
+		
+		--90
+		--offsetfloor = 0
 		
 end
 
@@ -16,21 +19,28 @@ end
 function _update()
 
   t = t + 0.01
-  x = 64-8 + 50 * sin(t)
-  y = 64-16 + 45 * cos(t)
+  x = 64- 8 + 50 * sin(t)
+  y = 64-18 + 45 * cos(t)
   
-  --2
-  flipsprite = (x-lastx) >0
-  lastx = x
+  --30
+  --flipsprite = (x-lastx) >0
+  --lastx = x
   
-  --3
-  if rnd(1)<0.1 then
-    init_ghost(x,y)
-    sfx(0)
-  end
+  --40
+  --if rnd(1)<0.1 then
+  --  init_ghost(x,y)
+  --  --80
+  --  --sfx(0)
+  --end
   
-  --4
-  foreach(ghosts,update_ghost)
+  --50
+  --foreach(ghosts,update_ghost)
+  
+  --90
+  --offsetfloor = offsetfloor + 1
+  --if offsetfloor >= 32 then
+  --  offsetfloor = 0
+  --end
 
 end  
   
@@ -38,19 +48,29 @@ end
 function _draw()
 
   pal()
-  rectfill(0,0,127,119,1)
-  
-  spr(18,0,120,4,1)
-  spr(18,32,120,4,1)
-  spr(18,64,120,4,1)
-  spr(18,96,120,4,1)
+  rectfill(0,0,127,127,1)
 
-	 palt(14,true)
-  foreach(ghosts,draw_ghost)
+  palt(0,false)  
+  spr(18,  0,120,4,1)
+  spr(18, 32,120,4,1)
+  spr(18, 64,120,4,1)
+  spr(18, 96,120,4,1)
+
+  --90
+  --spr(18,  0-offsetfloor,120,4,1)
+  --spr(18, 32-offsetfloor,120,4,1)
+  --spr(18, 64-offsetfloor,120,4,1)
+  --spr(18, 96-offsetfloor,120,4,1)
+  --spr(18,128-offsetfloor,120,4,1)
+
+  --40
+	 --palt(14,true)
+  --foreach(ghosts,draw_ghost)
 
   palt(15,true)
-  palt(0,false)
-  spr(16,x,y,2,2,flipsprite)
+  spr(16,x,y,2,2)
+  --30
+  --spr(16,x,y,2,2,flipsprite)
     
 end
 
@@ -60,7 +80,8 @@ function init_ghost(x,y)
   g = {}
   g.x = x+4
   g.y = y+4
-  g.dy = 1
+  --60
+  --g.dy = 1
   g.time = 0
   g.sprite = 0
   add (ghosts, g) 
@@ -70,24 +91,30 @@ end
 
 function update_ghost(g)
 
+  --90
+  --g.x = g.x - 1
 
   if (g.y>=113) then
 
-    if g.sprite<=1 then
-      g.sprite = 2
-    elseif g.sprite<=2 then
-      g.sprite = 3
-    elseif g.sprite<=3 then
-      g.sprite = 4
-    else
+    --70
+    --if g.sprite<=1 then
+    --  g.sprite = 2
+    --elseif g.sprite<=2 then
+    --  g.sprite = 3
+    --elseif g.sprite<=3 then
+    --  g.sprite = 4
+    --else
       del(ghosts, g)
-      sfx(1)
-    end
+      --80
+      --sfx(1)
+    --end
   
   else
 
-    g.y = g.y + g.dy
-    g.dy = g.dy+0.03
+    g.y = g.y + 1
+    --60
+    --g.y = g.y + g.dy
+    --g.dy = g.dy+0.03
 
     g.time = g.time + 1
     if g.time > 10 then
